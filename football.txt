@@ -1,13 +1,14 @@
-create database football;
+mysql> create database football;
 
-use football;
+mysql> use football;
 
-create table team (id int not null auto_increment, name nvarchar(100) not null, founded_date date,
+mysql> create table team (id int not null auto_increment, name nvarchar(100) not null, founded_date date,
 			primary key(id));
 
-insert into team (name, founded_date) values ('Barcelona', '1899-11-29');
-insert into team (name, founded_date) values ('Manchester City', '1880-01-01');
-insert into team (name, founded_date) values ('Real Madrid', '1902-03-06');
+mysql> insert into team (name, founded_date) values ('Barcelona', '1899-11-29');
+mysql> insert into team (name, founded_date) values ('Manchester City', '1880-01-01');
+mysql> insert into team (name, founded_date) values ('Real Madrid', '1902-03-06');
+mysql> select * from team;
 
 create table player (id int not null auto_increment, name nvarchar(100) not null, jersy_no int not null,
  			age int not null, salary decimal(10,2) not null, team_id int, height decimal(5,2), 
