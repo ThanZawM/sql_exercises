@@ -1,0 +1,253 @@
+mysql> create database football; 
+mysql> use football;
+Database changed
+mysql>
+mysql> create table team (id int not null auto_increment, name nvarchar(100) not
+ null, founded_date date,
+    ->                  primary key(id));
+ERROR 1050 (42S01): Table 'team' already exists
+mysql>
+mysql> insert into team (name, founded_date) values ('Barcelona', '1899-11-29');
+
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into team (name, founded_date) values ('Manchester City', '1880-01
+-01');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into team (name, founded_date) values ('Real Madrid', '1902-03-06'
+);
+Query OK, 1 row affected (0.13 sec)
+
+mysql>
+mysql> create table player (id int not null auto_increment, name nvarchar(100) n
+ot null, jersy_no int not null,
+    ->                          age int not null, salary decimal(10,2) not null,
+ team_id int, height decimal(5,2),
+    ->                  primary key(id), foreign key(team_id) references team(id
+));
+ERROR 1050 (42S01): Table 'player' already exists
+mysql>
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+
+    ->                  ('Ter Stegen', 1, 28, 250000, 1, 187);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Pique', 3, 33, 880000, 1, 194);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Lenglet', 15, 24, 250000, 1, 186);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Jordi Alba', 18, 31, 600000, 1, 170);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Roberto', 20, 28, 680000, 1, 178);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Rakitic', 4, 32, 1120000, 1, 184);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Busquets', 5, 31, 1040000, 1, 189);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('De Jong', 21, 22, 1440000, 1, 180);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Suarez', 9, 33, 1620000, 1, 182);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Lionel Messi', 10, 33, 2500000, 1, 170);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Griezmann', 17, 29, 1380000, 1, 176);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Ederson', 31, 25, 65000, 2, 188);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Otamendi', 30, 31, 180000, 2, 181);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Laporte', 14, 25, 120000, 2, 189);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Walker', 2, 29, 110000, 2, 178);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Mendy', 22, 24, 95000, 2, 183);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Fernandinho', 25, 34, 180000, 2, 177);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('David Silva', 21, 34, 220000, 2, 170);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('De Bruyne', 17, 28, 350000, 2, 181);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Bernardo Silva', 20, 24, 150000, 2, 173);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Kun Aguero', 10, 31, 230000, 2, 172);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into player (name, jersy_no, age, salary, team_id, height) values
+    ->                  ('Sterling', 7, 24, 300000, 2, 170);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> select * from player where team_id=1;
++----+--------------+----------+-----+------------+---------+--------+
+| id | name         | jersy_no | age | salary     | team_id | height |
++----+--------------+----------+-----+------------+---------+--------+
+|  1 | Ter Stegen   |        1 |  28 |  250000.00 |       1 | 187.00 |
+|  2 | Pique        |        3 |  33 |  880000.00 |       1 | 194.00 |
+|  3 | Lenglet      |       15 |  24 |  250000.00 |       1 | 186.00 |
+|  4 | Jordi Alba   |       18 |  31 |  600000.00 |       1 | 170.00 |
+|  5 | Roberto      |       20 |  28 |  680000.00 |       1 | 178.00 |
+|  6 | Rakitic      |        4 |  32 | 1120000.00 |       1 | 184.00 |
+|  7 | Busquets     |        5 |  31 | 1040000.00 |       1 | 189.00 |
+|  8 | De Jong      |       21 |  22 | 1440000.00 |       1 | 180.00 |
+|  9 | Suarez       |        9 |  33 | 1620000.00 |       1 | 182.00 |
+| 10 | Lionel Messi |       10 |  33 | 2500000.00 |       1 | 170.00 |
+| 11 | Griezmann    |       17 |  29 | 1380000.00 |       1 | 176.00 |
+| 23 | Ter Stegen   |        1 |  28 |  250000.00 |       1 | 187.00 |
+| 24 | Pique        |        3 |  33 |  880000.00 |       1 | 194.00 |
+| 25 | Lenglet      |       15 |  24 |  250000.00 |       1 | 186.00 |
+| 26 | Jordi Alba   |       18 |  31 |  600000.00 |       1 | 170.00 |
+| 27 | Roberto      |       20 |  28 |  680000.00 |       1 | 178.00 |
+| 28 | Rakitic      |        4 |  32 | 1120000.00 |       1 | 184.00 |
+| 29 | Busquets     |        5 |  31 | 1040000.00 |       1 | 189.00 |
+| 30 | De Jong      |       21 |  22 | 1440000.00 |       1 | 180.00 |
+| 31 | Suarez       |        9 |  33 | 1620000.00 |       1 | 182.00 |
+| 32 | Lionel Messi |       10 |  33 | 2500000.00 |       1 | 170.00 |
+| 33 | Griezmann    |       17 |  29 | 1380000.00 |       1 | 176.00 |
++----+--------------+----------+-----+------------+---------+--------+
+22 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from player where salary>500000;
++----+--------------+----------+-----+------------+---------+--------+
+| id | name         | jersy_no | age | salary     | team_id | height |
++----+--------------+----------+-----+------------+---------+--------+
+|  2 | Pique        |        3 |  33 |  880000.00 |       1 | 194.00 |
+|  4 | Jordi Alba   |       18 |  31 |  600000.00 |       1 | 170.00 |
+|  5 | Roberto      |       20 |  28 |  680000.00 |       1 | 178.00 |
+|  6 | Rakitic      |        4 |  32 | 1120000.00 |       1 | 184.00 |
+|  7 | Busquets     |        5 |  31 | 1040000.00 |       1 | 189.00 |
+|  8 | De Jong      |       21 |  22 | 1440000.00 |       1 | 180.00 |
+|  9 | Suarez       |        9 |  33 | 1620000.00 |       1 | 182.00 |
+| 10 | Lionel Messi |       10 |  33 | 2500000.00 |       1 | 170.00 |
+| 11 | Griezmann    |       17 |  29 | 1380000.00 |       1 | 176.00 |
+| 24 | Pique        |        3 |  33 |  880000.00 |       1 | 194.00 |
+| 26 | Jordi Alba   |       18 |  31 |  600000.00 |       1 | 170.00 |
+| 27 | Roberto      |       20 |  28 |  680000.00 |       1 | 178.00 |
+| 28 | Rakitic      |        4 |  32 | 1120000.00 |       1 | 184.00 |
+| 29 | Busquets     |        5 |  31 | 1040000.00 |       1 | 189.00 |
+| 30 | De Jong      |       21 |  22 | 1440000.00 |       1 | 180.00 |
+| 31 | Suarez       |        9 |  33 | 1620000.00 |       1 | 182.00 |
+| 32 | Lionel Messi |       10 |  33 | 2500000.00 |       1 | 170.00 |
+| 33 | Griezmann    |       17 |  29 | 1380000.00 |       1 | 176.00 |
++----+--------------+----------+-----+------------+---------+--------+
+18 rows in set (0.00 sec)
+
+mysql>
+mysql> select team.name, sum(salary) from team, player where team.id=1 and
+    -> team.id=player.team_id;
++-----------+-------------+
+| name      | sum(salary) |
++-----------+-------------+
+| Barcelona | 23520000.00 |
++-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select team.name, sum(salary) from team, player where team.id=2 and
+    -> team.id = player.team_id;
++-----------------+-------------+
+| name            | sum(salary) |
++-----------------+-------------+
+| Manchester City |  4000000.00 |
++-----------------+-------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select * from player where height<180;
++----+----------------+----------+-----+------------+---------+--------+
+| id | name           | jersy_no | age | salary     | team_id | height |
++----+----------------+----------+-----+------------+---------+--------+
+|  4 | Jordi Alba     |       18 |  31 |  600000.00 |       1 | 170.00 |
+|  5 | Roberto        |       20 |  28 |  680000.00 |       1 | 178.00 |
+| 10 | Lionel Messi   |       10 |  33 | 2500000.00 |       1 | 170.00 |
+| 11 | Griezmann      |       17 |  29 | 1380000.00 |       1 | 176.00 |
+| 15 | Walker         |        2 |  29 |  110000.00 |       2 | 178.00 |
+| 17 | Fernandinho    |       25 |  34 |  180000.00 |       2 | 177.00 |
+| 18 | David Silva    |       21 |  34 |  220000.00 |       2 | 170.00 |
+| 20 | Bernardo Silva |       20 |  24 |  150000.00 |       2 | 173.00 |
+| 21 | Kun Aguero     |       10 |  31 |  230000.00 |       2 | 172.00 |
+| 22 | Sterling       |        7 |  24 |  300000.00 |       2 | 170.00 |
+| 26 | Jordi Alba     |       18 |  31 |  600000.00 |       1 | 170.00 |
+| 27 | Roberto        |       20 |  28 |  680000.00 |       1 | 178.00 |
+| 32 | Lionel Messi   |       10 |  33 | 2500000.00 |       1 | 170.00 |
+| 33 | Griezmann      |       17 |  29 | 1380000.00 |       1 | 176.00 |
+| 37 | Walker         |        2 |  29 |  110000.00 |       2 | 178.00 |
+| 39 | Fernandinho    |       25 |  34 |  180000.00 |       2 | 177.00 |
+| 40 | David Silva    |       21 |  34 |  220000.00 |       2 | 170.00 |
+| 42 | Bernardo Silva |       20 |  24 |  150000.00 |       2 | 173.00 |
+| 43 | Kun Aguero     |       10 |  31 |  230000.00 |       2 | 172.00 |
+| 44 | Sterling       |        7 |  24 |  300000.00 |       2 | 170.00 |
++----+----------------+----------+-----+------------+---------+--------+
+20 rows in set (0.00 sec)
+
+mysql>
+mysql> select team.name, avg(salary) from team, player where team.id=1 and
+    -> team.id=player.team_id;
++-----------+----------------+
+| name      | avg(salary)    |
++-----------+----------------+
+| Barcelona | 1069090.909091 |
++-----------+----------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select team.name, avg(salary) from team, player where team.id=2 and
+    -> team.id=player.team_id;
++-----------------+---------------+
+| name            | avg(salary)   |
++-----------------+---------------+
+| Manchester City | 181818.181818 |
++-----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select * from player where salary = (select min(salary) from player);
++----+---------+----------+-----+----------+---------+--------+
+| id | name    | jersy_no | age | salary   | team_id | height |
++----+---------+----------+-----+----------+---------+--------+
+| 12 | Ederson |       31 |  25 | 65000.00 |       2 | 188.00 |
+| 34 | Ederson |       31 |  25 | 65000.00 |       2 | 188.00 |
++----+---------+----------+-----+----------+---------+--------+
+2 rows in set (0.00 sec)
