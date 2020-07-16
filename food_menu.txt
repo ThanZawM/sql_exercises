@@ -1,0 +1,191 @@
+
+mysql> create database restaurant;
+Query OK, 1 row affected (0.16 sec)
+
+mysql>
+mysql> use restaurant;
+Database changed
+mysql>
+mysql> create table menu (id int not null auto_increment, name varchar(20), desc
+ription varchar(20),
+    ->                  primary key(id));
+Query OK, 0 rows affected (0.98 sec)
+
+mysql>
+mysql> insert into menu (name, description) values ('menu1', 'desc1');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into menu (name, description) values ('menu2', 'desc2');
+Query OK, 1 row affected (0.30 sec)
+
+mysql> insert into menu (name, description) values ('menu3', 'desc3');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into menu (name, description) values ('menu4', 'desc4');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into menu (name, description) values ('menu5', 'desc5');
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> select * from menu;
++----+-------+-------------+
+| id | name  | description |
++----+-------+-------------+
+|  1 | menu1 | desc1       |
+|  2 | menu2 | desc2       |
+|  3 | menu3 | desc3       |
+|  4 | menu4 | desc4       |
+|  5 | menu5 | desc5       |
++----+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> create table food (id int not null auto_increment, name varchar(20) uniqu
+e, price decimal(10,2)
+    ->                  not null, menu_id int not null, primary key(id),
+    ->                  foreign key(menu_id) references menu(id));
+Query OK, 0 rows affected (0.54 sec)
+
+mysql>
+mysql> insert into food (name, price, menu_id) values ('food1', 100, 1);
+Query OK, 1 row affected (0.24 sec)
+
+mysql> insert into food (name, price, menu_id) values ('food2', 200, 1);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into food (name, price, menu_id) values ('food3', 300, 2);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into food (name, price, menu_id) values ('food4', 400, 2);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into food (name, price, menu_id) values ('food5', 500, 3);
+Query OK, 1 row affected (0.26 sec)
+
+mysql> insert into food (name, price, menu_id) values ('food6', 600, 3);
+Query OK, 1 row affected (0.26 sec)
+
+mysql>
+mysql> select * from food;
++----+-------+--------+---------+
+| id | name  | price  | menu_id |
++----+-------+--------+---------+
+|  1 | food1 | 100.00 |       1 |
+|  2 | food2 | 200.00 |       1 |
+|  3 | food3 | 300.00 |       2 |
+|  4 | food4 | 400.00 |       2 |
+|  5 | food5 | 500.00 |       3 |
+|  6 | food6 | 600.00 |       3 |
++----+-------+--------+---------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> select menu.name, food.name, food.price from menu, food where menu.id=foo
+d.menu_id;
++-------+-------+--------+
+| name  | name  | price  |
++-------+-------+--------+
+| menu1 | food1 | 100.00 |
+| menu1 | food2 | 200.00 |
+| menu2 | food3 | 300.00 |
+| menu2 | food4 | 400.00 |
+| menu3 | food5 | 500.00 |
+| menu3 | food6 | 600.00 |
++-------+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> create table orders (id int not null auto_increment, sale_date date not n
+ull,
+    -> quantity int not null, food_id int not null, total_price decimal(15,2) no
+t null,
+    -> primary key(id), foreign key(food_id) references food(id));
+Query OK, 0 rows affected (0.61 sec)
+
+mysql>
+mysql> insert into orders (sale_date, quantity, food_id, total_price) values
+    ->                  ('2019-07-17', 5, 1, 500);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into orders (sale_date, quantity, food_id, total_price) values
+    ->                  ('2019-08-17', 6, 2, 1200);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into orders (sale_date, quantity, food_id, total_price) values
+    ->                  ('2019-09-17', 7, 3, 2100);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into orders (sale_date, quantity, food_id, total_price) values
+    ->                  ('2019-10-17', 8, 4, 3200);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into orders (sale_date, quantity, food_id, total_price) values
+    ->                  ('2019-11-17', 9, 5, 4500);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into orders (sale_date, quantity, food_id, total_price) values
+    ->                  ('2019-12-17', 9, 6, 5400);
+Query OK, 1 row affected (0.31 sec)
+
+mysql>
+mysql> select * from orders;
++----+------------+----------+---------+-------------+
+| id | sale_date  | quantity | food_id | total_price |
++----+------------+----------+---------+-------------+
+|  1 | 2019-07-17 |        5 |       1 |      500.00 |
+|  2 | 2019-08-17 |        6 |       2 |     1200.00 |
+|  3 | 2019-09-17 |        7 |       3 |     2100.00 |
+|  4 | 2019-10-17 |        8 |       4 |     3200.00 |
+|  5 | 2019-11-17 |        9 |       5 |     4500.00 |
+|  6 | 2019-12-17 |        9 |       6 |     5400.00 |
++----+------------+----------+---------+-------------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> select food.name as Maximum_Sale_Item, orders.total_price from food, orde
+rs where food.id=orders.food_id
+    -> and total_price = ( select max(total_price) from orders);
++-------------------+-------------+
+| Maximum_Sale_Item | total_price |
++-------------------+-------------+
+| food6             |     5400.00 |
++-------------------+-------------+
+1 row in set (0.01 sec)
+
+mysql>
+mysql> select food.name as Minimum_Sale_Item, orders.total_price from food, orde
+rs where food.id=orders.food_id
+    -> and total_price = ( select min(total_price) from orders);
++-------------------+-------------+
+| Minimum_Sale_Item | total_price |
++-------------------+-------------+
+| food1             |      500.00 |
++-------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select sale_date, total_price as Sale_Amount from orders order by sale_da
+te;
++------------+-------------+
+| sale_date  | Sale_Amount |
++------------+-------------+
+| 2019-07-17 |      500.00 |
+| 2019-08-17 |     1200.00 |
+| 2019-09-17 |     2100.00 |
+| 2019-10-17 |     3200.00 |
+| 2019-11-17 |     4500.00 |
+| 2019-12-17 |     5400.00 |
++------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql> select sum(total_price) from orders where sale_date between '2019-07-17'
+and
+    -> '2019-11-17';
++------------------+
+| sum(total_price) |
++------------------+
+|         11500.00 |
++------------------+
+1 row in set (0.00 sec)
